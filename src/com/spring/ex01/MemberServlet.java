@@ -1,6 +1,7 @@
 package com.spring.ex01;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -22,12 +23,18 @@ public class MemberServlet extends HttpServlet {
 	}
 
 	private void doHandle(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
+		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
+		
 		MemberDAO dao = new MemberDAO();
-		List<MemberVO> membersList = dao.selectAllMemberList();
-		//List<HashMap<String, String>> membersList = dao.selectAllMemberList();
+		
+		//List<MemberVO> membersList = dao.selectAllMemberList();
+		
+		List<HashMap<String, String>> membersList = dao.selectAllMemberList();
+		
 		request.setAttribute("membersList", membersList);
+		
 		RequestDispatcher dispatch = request.getRequestDispatcher("test01/listMembers.jsp");
 		dispatch.forward(request, response);
 	}

@@ -11,11 +11,13 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 public class MemberDAO {
 	private static SqlSessionFactory sqlMapper = null;
 
+	
 	private static SqlSessionFactory getInstance() {
 		if (sqlMapper == null) {
 			try {
 				String resource = "mybatis/SqlMapConfig.xml";
 				Reader reader = Resources.getResourceAsReader(resource);
+				//마의바티스를 이용하는 sqlMapper 객체를 가져온다
 				sqlMapper = new SqlSessionFactoryBuilder().build(reader);
 				reader.close();
 			} catch (Exception e) {

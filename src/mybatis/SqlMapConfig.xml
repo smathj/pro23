@@ -4,23 +4,30 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-   <typeAliases>
-      <typeAlias type="com.spring.ex01.MemberVO" alias="memberVO"/>
-   </typeAliases>
+	<!-- 저장할 빈(파라미터/리턴) -->
+	<typeAliases>
+		<typeAlias type="com.spring.ex01.MemberVO" alias="memberVO" />
+	</typeAliases>
+	
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<!-- 데이터베이스 연결을 설정 -->
+			<dataSource type="POOLED">
+				<property name="driver"
+					value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url"
+					value="JDBC:oracle:thin:@localhost:1521:XE" />
+				<property name="username" value="scott" />
+				<property name="password" value="1234" />
+			</dataSource>
+		</environment>
+	</environments>
 
-   <environments default="development">
-     <environment id="development">
-        <transactionManager type="JDBC"/>
-        <dataSource  type="POOLED">
-            <property name="driver"  value="oracle.jdbc.driver.OracleDriver" />
-            <property  name="url"    value="JDBC:oracle:thin:@localhost:1521:XE" />
-            <property name="username" value="scott" />
-            <property name="password"  value="tiger"/>        
-        </dataSource>
-     </environment>
-   </environments>
-
-<mappers>
-   <mapper resource="mybatis/mappers/member.xml"/>
-</mappers>
+	<!-- xml들 위치 -->
+	<mappers>
+		<mapper resource="mybatis/mappers/member.xml" /> <!-- src밑에 -->
+	</mappers>
+	
 </configuration>
